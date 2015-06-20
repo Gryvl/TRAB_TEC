@@ -7,10 +7,20 @@ class Controller extends MouseAdapter implements ActionListener{
 	Dados dados;
 
 	public void actionPerformed(java.awt.event.ActionEvent e){
-		System.out.println("oi");
-		if(e.getActionCommand().equals("pesquisar")){			
-			model.pesquisar("view.pesquisa.getText()");
-		}	
+		System.out.println("Entreiiiiiiiii");
+		if(e.getActionCommand().equals("pesquisar_consulta")){			
+			model.pesquisar(1);
+		}
+		if(e.getActionCommand().equals("pesquisar_paciente")){
+			model.pesquisar(2);
+		}
+		if(e.getActionCommand().equals("pesquisar_medico"))	{
+			model.pesquisar(3);
+		}
+		if(e.getActionCommand().equals("pesquisar_atendente")){
+			model.pesquisar(4);
+		}
+
 	}
 	public void mouseClicked(MouseEvent e) {
 		model.visualizarHorario(view.calendario.atualDia,view.calendario.atualMes,view.calendario.atualAno);

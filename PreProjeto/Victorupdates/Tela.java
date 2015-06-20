@@ -20,10 +20,25 @@ public class Tela implements java.util.Observer{
 	JLabel imagemPerfil;
 	JTabbedPane escolhas;
 	JPanel centro;
-	Controller controller;
+	
 	Usuario principal;
 
 	TextField pesquisa;
+
+	Controller controller;
+	/*Controller controller2 = new Controller();
+	Controller controller3 = new Controller();
+	Controller controller4 = new Controller();
+
+	controller2.dados = controller.dados;
+	controller2.model = controller.model;
+
+	controller3.dados = controller.dados;
+	controller3.model = controller.model;
+
+	controller4.dados = controller.dados;
+	controller4.model = controller.model;
+	*/
 	
 	TextField pesquisaConsulta;
 	TextField pesquisaPaciente;
@@ -33,7 +48,9 @@ public class Tela implements java.util.Observer{
 	DefaultTableModel modeloConsultas;
 
 	JButton botaoPesquisa;
-	JButton botaoPesquisa1;
+	JButton botaoPesquisaMe;
+	JButton botaoPesquisaPa;
+	JButton botaoPesquisaAt;
 
  	public Calendario calendario;
 
@@ -124,7 +141,6 @@ public class Tela implements java.util.Observer{
 		centro.setLayout(new GridBagLayout());
 		//centro.setBorder(BorderFactory.createLineBorder(Color.gray));
 		centro.setBackground(Color.white);
-		
 	}
 
 	public void addAbaConsultas(){
@@ -201,7 +217,7 @@ public class Tela implements java.util.Observer{
 		centro.add(escolhas,new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(10,5	,20,20),0,0));
 		painel.add(centro,new GridBagConstraints(1,0,3,0,10,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0));
 
-		botaoPesquisa.setActionCommand("pesquisar");
+		botaoPesquisa.setActionCommand("pesquisar_consulta");
 		botaoPesquisa.addActionListener(controller);
 
 	}
@@ -209,7 +225,7 @@ public class Tela implements java.util.Observer{
 	public void addAbaPacientes(){
 
 		JPanel pacientes;
-		JComboBox<String> caixaTipoPesquisa = new JComboBox<>();
+		JComboBox<String> caixaTipoPesquisa = new JComboBox<>();	   
 	    DefaultTableModel modeloPacientes;
 	    JTable tabelaPacientes;
 	    JScrollPane scrollPacientes;
@@ -219,7 +235,7 @@ public class Tela implements java.util.Observer{
 		pacientes.setLayout(new GridBagLayout());
         //Criar controles
         //caixaTipoPesquisa = new JComboBox<>();      
-        botaoPesquisa1 = new JButton ("Pesquisar");
+        botaoPesquisaPa = new JButton ("Pesquisar");
         modeloPacientes = new DefaultTableModel(){public boolean isCellEditable(int rowIndex, int mColIndex){return false;}};
         tabelaPacientes = new JTable(modeloPacientes);
         scrollPacientes = new JScrollPane(tabelaPacientes);
@@ -233,7 +249,7 @@ public class Tela implements java.util.Observer{
         //Setar as bordas //GridBsgLayout(x,y,largura,altura);
         //Pacientes.add(caixaTipoPesquisa,new GridBagConstraints(0,0,1,1,0,0,GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,new Insets(10,10,10,10),0,0));
         pacientes.add(pesquisaPaciente,new GridBagConstraints(1,0,1,1,1,0,GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,new Insets(10,10,10,10),0,0));
-        pacientes.add(botaoPesquisa1,new GridBagConstraints(2,0,1,1,0,0,GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,new Insets(10,10,10,10),0,0));
+        pacientes.add(botaoPesquisaPa,new GridBagConstraints(2,0,1,1,0,0,GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,new Insets(10,10,10,10),0,0));
         
         //Propriedade da caixa de pesquisa com texto padrao
         pesquisaPaciente.setForeground(Color.gray);
@@ -280,17 +296,17 @@ public class Tela implements java.util.Observer{
 
 		escolhas.add( pacientes, "     Pacientes     ");
 
-		centro.add(escolhas,new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(10,5	,20,20),0,0));
+		centro.add(escolhas,new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(10,5,20,20),0,0));
 		painel.add(centro,new GridBagConstraints(1,0,3,0,10,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0));
 
-		botaoPesquisa1.setActionCommand("pesquisar");
-		botaoPesquisa1.addActionListener(controller);
+		
+		botaoPesquisa.setActionCommand("pesquisar_paciente");
+		botaoPesquisaPa.addActionListener(controller);
 	}
 
 	public void addAbaAtendentes(){
 		JPanel atendentes;
-		JComboBox<String> caixaTipoPesquisa = new JComboBox<>();
-	    JButton botaoPesquisa;
+		JComboBox<String> caixaTipoPesquisa = new JComboBox<>();	   
 	    DefaultTableModel modeloAtendentes;
 	    JTable tabelaAtendentes;
 	    JScrollPane scrollAtendentes;
@@ -300,7 +316,7 @@ public class Tela implements java.util.Observer{
 		atendentes.setLayout(new GridBagLayout());
         //Criar controles
         //caixaTipoPesquisa = new JComboBox<>();      
-        botaoPesquisa = new JButton ("Pesquisar");
+        botaoPesquisaAt = new JButton ("Pesquisar");
         modeloAtendentes = new DefaultTableModel(){public boolean isCellEditable(int rowIndex, int mColIndex){return false;}};
         tabelaAtendentes = new JTable(modeloAtendentes);
         scrollAtendentes = new JScrollPane(tabelaAtendentes);
@@ -314,7 +330,7 @@ public class Tela implements java.util.Observer{
         //Setar as bordas //GridBsgLayout(x,y,largura,altura);
         //Atendentes.add(caixaTipoPesquisa,new GridBagConstraints(0,0,1,1,0,0,GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,new Insets(10,10,10,10),0,0));
         atendentes.add(pesquisaAtendente,new GridBagConstraints(1,0,1,1,1,0,GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,new Insets(10,10,10,10),0,0));
-        atendentes.add(botaoPesquisa,new GridBagConstraints(2,0,1,1,0,0,GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,new Insets(10,10,10,10),0,0));
+        atendentes.add(botaoPesquisaAt,new GridBagConstraints(2,0,1,1,0,0,GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,new Insets(10,10,10,10),0,0));
         
         //Propriedade da caixa de pesquisa com texto padrao
         pesquisaAtendente.setForeground(Color.gray);
@@ -361,17 +377,17 @@ public class Tela implements java.util.Observer{
 
 		escolhas.add( atendentes, "     Atendentes     ");
 
-		centro.add(escolhas,new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(10,5	,20,20),0,0));
+		centro.add(escolhas,new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(10,5,20,20),0,0));
 		painel.add(centro,new GridBagConstraints(1,0,3,0,10,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0));
 
-		botaoPesquisa.setActionCommand("pesquisar");
-		botaoPesquisa.addActionListener(controller);
+		
+		botaoPesquisa.setActionCommand("pesquisar_atendente");
+		botaoPesquisaAt.addActionListener(controller);
 	}
 
 	public void addAbaMedicos(){
 		JPanel medicos;
-		JComboBox<String> caixaTipoPesquisa = new JComboBox<>();
-	    JButton botaoPesquisa;
+		JComboBox<String> caixaTipoPesquisa = new JComboBox<>();	   
 	    DefaultTableModel modeloMedicos;
 	    JTable tabelaMedicos;
 	    JScrollPane scrollMedicos;
@@ -381,7 +397,7 @@ public class Tela implements java.util.Observer{
 		medicos.setLayout(new GridBagLayout());
         //Criar controles
         //caixaTipoPesquisa = new JComboBox<>();      
-        botaoPesquisa = new JButton ("Pesquisar");
+        botaoPesquisaMe = new JButton ("Pesquisar");
         modeloMedicos = new DefaultTableModel(){public boolean isCellEditable(int rowIndex, int mColIndex){return false;}};
         tabelaMedicos = new JTable(modeloMedicos);
         scrollMedicos = new JScrollPane(tabelaMedicos);
@@ -395,7 +411,7 @@ public class Tela implements java.util.Observer{
         //Setar as bordas //GridBsgLayout(x,y,largura,altura);
         //Medicos.add(caixaTipoPesquisa,new GridBagConstraints(0,0,1,1,0,0,GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,new Insets(10,10,10,10),0,0));
         medicos.add(pesquisaMedico,new GridBagConstraints(1,0,1,1,1,0,GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,new Insets(10,10,10,10),0,0));
-        medicos.add(botaoPesquisa,new GridBagConstraints(2,0,1,1,0,0,GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,new Insets(10,10,10,10),0,0));
+        medicos.add(botaoPesquisaMe,new GridBagConstraints(2,0,1,1,0,0,GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,new Insets(10,10,10,10),0,0));
         
         //Propriedade da caixa de pesquisa com texto padrao
        	pesquisaMedico.setForeground(Color.gray);
@@ -442,24 +458,26 @@ public class Tela implements java.util.Observer{
 
 		escolhas.add( medicos, "     Medicos     ");
 
-		centro.add(escolhas,new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(10,5	,20,20),0,0));
+		centro.add(escolhas,new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(10,5,20,20),0,0));
 		painel.add(centro,new GridBagConstraints(1,0,3,0,10,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0));
 
-		botaoPesquisa.setActionCommand("pesquisar");
-		botaoPesquisa.addActionListener(controller);
+		botaoPesquisaMe.setActionCommand("pesquisar_medico");
+		botaoPesquisaMe.addActionListener(controller);
 	}
 
 	public void tornarVisivel(){
 		janela.setVisible(true);
 	}
-
+	
 	public void addController(Controller controller){
 		this.controller = controller;
 		botaoPesquisa.addActionListener(controller);
-		botaoPesquisa1.addActionListener(controller);
+		botaoPesquisaMe.addActionListener(controller);
+		botaoPesquisaPa.addActionListener(controller);
+		botaoPesquisaAt.addActionListener(controller);
 		calendario.tabelaCalendario.addMouseListener(controller);
 	}
-
+	
 	public void update(Observable obs, Object obj) {
         Consulta procurado;
         int cont = 0;
@@ -469,14 +487,14 @@ public class Tela implements java.util.Observer{
         //int cont =0;
         
         //medico.dados.pesquisar(pesquisa.getText())
-		//System.out.println("Pesquizando....");
+		System.out.println("Pesquizando....");
 		cont=0;
 		
 		while(modeloConsultas.getRowCount()>0){
 	        	modeloConsultas.removeRow(cont);
 	    } 
 
-	    System.out.println("Entrei!!");
+	    //System.out.println("Entrei!!");
 	    if (obj instanceof Collection ){
 	    	@SuppressWarnings("unchecked")
 	    	ArrayList<Consulta> consultasDia = (ArrayList)obj;	
@@ -495,7 +513,9 @@ public class Tela implements java.util.Observer{
 	    	achei = true;
 	    	Usuario x;
 	    	Consulta w;
+	        
 	        if ((int)obj == 1){
+	        	
 	        	alvo = pesquisaConsulta.getText();
 	        	pesquisaConsulta.setText("Pesquisando...");
 				/*for(int i=6;i<22;i++){	

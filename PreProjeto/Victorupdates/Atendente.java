@@ -37,9 +37,9 @@ class Atendente extends Paciente{
 		System.out.println(" 5 - Modificar Paciente");
 	}
 
-	void pesquisar(String pequisa){
+	void pesquisar(int pesquisa){
 		setChanged();
-		notifyObservers(1);
+		notifyObservers(pesquisa);
 	}
 
 	void visualizarHorario(int dia, int mes, int ano){

@@ -9,9 +9,9 @@ class Medico extends Usuario{
 		super(d);
 	}
 
-    void pesquisar(String pequisa){
+    void pesquisar(int pesquisa){
 		setChanged();
-		notifyObservers(1);
+		notifyObservers(pesquisa);
 	}
     
 	void visualizarHorario(int dia, int mes, int ano){

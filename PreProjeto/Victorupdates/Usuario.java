@@ -31,7 +31,7 @@ abstract class Usuario extends java.util.Observable implements Serializable{
 		return senha;
 	}
     
-    abstract void pesquisar(String x);
+    abstract void pesquisar(int x);
 
     void visualizarHorario(int dia, int mes, int ano){}
     
