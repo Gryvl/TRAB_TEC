@@ -52,6 +52,24 @@ class Main{
 			c2.setDataHora(16,5,2015,14);
 			bancoDados.adicionarConsulta(c2);
 
+			Consulta c3 = new Consulta();
+			c3.setMedico("Jose");
+			c3.setPaciente("Toin");
+			c3.setDataHora(16,5,2015,16);
+			bancoDados.adicionarConsulta(c3);
+
+			Consulta c4 = new Consulta();
+			c4.setMedico("Jose");
+			c4.setPaciente("Toin");
+			c4.setDataHora(17,5,2015,16);
+			bancoDados.adicionarConsulta(c4);
+
+			Consulta c5 = new Consulta();
+			c5.setMedico("Jose");
+			c5.setPaciente("Toin");
+			c5.setDataHora(18,5,2015,16);
+			bancoDados.adicionarConsulta(c5);
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}

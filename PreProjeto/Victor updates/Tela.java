@@ -489,9 +489,10 @@ public class Tela implements java.util.Observer{
 	    }       
 	    else{
 	    	//System.out.println("Entrou!!!!");
-	    	cont = modeloConsultas.getColumnCount() + 1;
-	    	achei = false;
+	    	cont = 0;
+	    	achei = true;
 	    	Usuario x;
+	    	Consulta w;
 	        if ((int)obj == 1){
 	        	alvo = pesquisaConsulta.getText();
 	        	pesquisaConsulta.setText("Pesquisando...");
@@ -502,17 +503,26 @@ public class Tela implements java.util.Observer{
 		        while(modeloConsultas.getRowCount()>0){
 		        	modeloConsultas.removeRow(cont);	        	
 		       	}
-		       	Iterator i = principal.dados.perfis[3].iterator();
 
-		       	while (i.hasNext()){ 
+		       	Iterator i = principal.dados.perfis[2].iterator();
+		       	Iterator z = principal.dados.consultas.iterator();
+		       	while (i.hasNext()&&achei){ 
 			       	x = (Usuario)i.next();
-			       	if(achei && (x.nome == alvo)){
-			       		modeloConsultas.addRow(new Object[]{"Paciente : "+x.nome});
-						//modeloConsultas.setValueAt("Horario: "+c.dataHora[3]+":00"+"\n"+"  Data: "+c.dataHora[0]+"/"+c.dataHora[1]+"/"+c.dataHora[2] , (c.dataHora[3]-6) , 0);
-			        	//modeloConsultas.setValueAt(,cont,1);
+		       		System.out.println(x.nome);
+			       	if (achei&&x.nome.equals(alvo)){
+			       		//modeloConsultas.addRow(new Object[]{"Paciente : "+x.nome});			       		
+			       		while (z.hasNext()){
+			       			w = (Consulta)z.next();
+				       		if (w.paciente.equals(alvo)){
+				       			modeloConsultas.addRow(new Object[]{"Paciente : "+x.nome});	
+					       		modeloConsultas.setValueAt("Data: "+w.dataHora[0]+"/"+w.dataHora[1]+"/"+w.dataHora[2]+"  Horario: "+w.dataHora[3]+":00"+"\n",cont,1);
+								//modeloConsultas.setValueAt("Horario: "+c.dataHora[3]+":00"+"\n"+"  Data: "+c.dataHora[0]+"/"+c.dataHora[1]+"/"+c.dataHora[2] , (c.dataHora[3]-6) , 0);
+					        	//modeloConsultas.setValueAt(,cont,1);					        	
+					        	cont++;
+				        	}
+			        	}
 			        	achei= false;
-			        	cont++;
-			        }
+			        }			        
 		        }				
 	        }
 	    }
